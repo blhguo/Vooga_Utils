@@ -12,6 +12,12 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import voogasalad.util.transform_library.Vector2;
 
+/**
+ * 
+ * @author Rayan
+ * Example that showcases the transform library. Drag the red square around to see it in action.
+ */
+
 public class TestTransform extends Application {
 	
 	private final int FRAMES_PER_SECOND = 60;
@@ -55,9 +61,15 @@ public class TestTransform extends Application {
         scene.setOnMouseDragged(event -> {
         	double deltaX = event.getSceneX() - mouseX;
         	double deltaY = event.getSceneY() - mouseY;
-        	Vector2 deltaXY = new Vector2(deltaX, deltaY);
         	
+        	/**
+        	 * The below code is an example of how the vector class can be used 
+        	 */
+        	
+        	Vector2 deltaXY = new Vector2(deltaX, deltaY);	
         	Vector2 playerPos = player2.getTransform().getPosition();
+        	
+        	
         	//Vector2 pos = new Vector2(deltaX + playerPos.getX(), deltaY + playerPos.getY());
         	Vector2 pos = playerPos.AddVector(deltaXY);
         	player2.getTransform().setPosition(pos);
@@ -87,6 +99,7 @@ public class TestTransform extends Application {
 	private void step(double timeElapsed) {
 		
 		player.moveObject(player2, 3);
+		
 		player.UpdateRectangle();
 		player2.UpdateRectangle();
 		
