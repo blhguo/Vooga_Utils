@@ -77,6 +77,7 @@ public class TestTransform extends Application {
         	
         	
         	//Vector2 pos = new Vector2(deltaX + playerPos.getX(), deltaY + playerPos.getY());
+        	
         	Vector2 pos = playerPos.AddVector(deltaXY);
         	player2.getTransform().setPosition(pos);
         	player2.UpdateRectangle();
@@ -95,32 +96,34 @@ public class TestTransform extends Application {
 	{
 		scene.setOnKeyPressed(e -> {
 			
+			
+		});
+		
+		scene.setOnKeyPressed(ef -> {
+			
 			Vector2 direction = new Vector2(0,0);
 			
-			if(e.getCode() == KeyCode.LEFT)
+			if(ef.getCode() == KeyCode.LEFT)
 			{
 				direction = new Vector2().Left();
 			}
 			
-			if(e.getCode() == KeyCode.RIGHT)
+			if(ef.getCode() == KeyCode.RIGHT)
 			{
 				direction = new Vector2().Right();
 			}
 			
-			if(e.getCode() == KeyCode.DOWN)
+			if(ef.getCode() == KeyCode.DOWN)
 			{
 				direction = new Vector2().Up();
 			}
 			
-			if(e.getCode() == KeyCode.UP)
+			if(ef.getCode() == KeyCode.UP)
 			{
 				direction = new Vector2().Down();
 			}
 			
 			player2.moveInDirection(direction, player2.getSpeed());
-		});
-		
-		scene.setOnKeyPressed(ef -> {
 			
 			if(ef.getCode() == KeyCode.H)
 			{
