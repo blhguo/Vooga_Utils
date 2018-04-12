@@ -37,7 +37,7 @@ public class TestTransform extends Application {
     
 	private double player1Speed = 3;
 	private double player2Speed = 10;
-	private double player3Speed = 3;
+	private double player3Speed = 3 * SECOND_DELAY;
     
 	@Override
 	public void start(Stage arg0) throws Exception {
@@ -128,7 +128,7 @@ public class TestTransform extends Application {
 				player.getRect().setVisible(!val);
 			}
 			
-			if(ef.getCode() == KeyCode.J)
+			if(ef.getCode() == KeyCode.J) 
 			{
 				boolean val = player3.getRect().isVisible();
 				player3.getRect().setVisible(!val);
@@ -156,7 +156,9 @@ public class TestTransform extends Application {
 	private void step(double timeElapsed) {
 		
 		player.moveTowards(player2, player.getSpeed());
-		player3.moveTowardsDamped(player2, player3.getSpeed(), SECOND_DELAY);
+		player3.moveTowardsDamped(player2, player3.getSpeed());
+		
+		
 		player.UpdateRectangle();
 		player2.UpdateRectangle();
 		player3.UpdateRectangle();

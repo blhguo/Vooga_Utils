@@ -73,9 +73,9 @@ public class Player {
 		transform.Move(direction, stepDistance);
 	}
 	
-	public void moveTowardsDamped(Player other, double stepDistance, double deltaTime)
+	public void moveTowardsDamped(Player other, double stepDistance)
 	{
-		transform.DampedMoveTowards(other.getTransform(), stepDistance, deltaTime);
+		transform.DampedMoveTowards(other.getTransform(), stepDistance);
 	}
 
 	public double getSpeed() {
