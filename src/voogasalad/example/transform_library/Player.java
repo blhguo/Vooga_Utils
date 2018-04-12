@@ -17,14 +17,17 @@ public class Player {
 	
 	double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
+    
+    private double speed;
 	
-	public Player(Vector2 position, double size, Color color)
+	public Player(Vector2 position, double size, Color color, double speed)
 	{
 		this.transform = new Transform(position);
 		this.rect = new Rectangle(size, size);
 		this.rect.setFill(color);
 		this.rect.setX(position.getX());
-		this.rect.setY(position.getY()	);
+		this.rect.setY(position.getY());
+		this.speed = speed;
 	}
 
 	public Transform getTransform() {
@@ -60,9 +63,27 @@ public class Player {
 	 * 
 	 * Calls moveobject in the transform class to move one object towards another
 	 */
-	public void moveObject(Player other, double stepDistance)
+	public void moveTowards(Player other, double stepDistance)
 	{
 		transform.MoveTowards(other.getTransform(), stepDistance);
+	}
+	
+	public void moveInDirection(Vector2 direction, double stepDistance)
+	{
+		transform.Move(direction, stepDistance);
+	}
+	
+	public void moveTowardsDamped(Player other, double stepDistance, double deltaTime)
+	{
+		transform.DampedMoveTowards(other.getTransform(), stepDistance, deltaTime);
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
 	}
 	
 }

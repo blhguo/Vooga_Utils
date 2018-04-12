@@ -131,13 +131,36 @@ public class Transform {
 	 * @param target: target transform object
 	 * @param stepDistance: the distance to be moved at every step
 	 * 
-	 * Moves the current object towards a new object. 
+	 * Moves the current object towards a new object at a constant speed. 
 	 * Returns false when the gameobject reaches the target
 	 */
 	public void MoveTowards(Transform target, double stepDistance)
 	{
 		Vector2 resultantVector = this.getDisplacementVector(target);
 		Vector2 temp = position.AddVector(resultantVector.getNormalized().MultiplyVector(stepDistance));
+		if(getDisplacement(this, target) <= stepDistance)
+		{
+			return;
+		}
+		position = temp;
+	
+	}
+	
+	/**
+	 * 
+	 * @param target: target transform object
+	 * @param stepDistance: the distance to be moved at every step
+	 * @param deltaTime: The time between frames
+	 * 
+	 * Moves the current object towards a new object, accelerating the object based upon the distance.
+	 * This will always move the same distance independent of frame rate i.e. two objects will move the same
+	 * distance over the same time.
+	 * This method requires the time between frames to function.
+	 */
+	public void DampedMoveTowards(Transform target, double stepDistance, double deltaTime)
+	{
+		Vector2 resultantVector = this.getDisplacementVector(target);
+		Vector2 temp = position.AddVector(resultantVector.MultiplyVector(stepDistance * deltaTime));
 		if(getDisplacement(this, target) <= stepDistance)
 		{
 			return;

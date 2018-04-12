@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -28,11 +29,16 @@ public class TestTransform extends Application {
 	private Group root;
 	private Player player;
 	private Player player2;
+	private Player player3;
 	
     
     private double mouseX;
     private double mouseY;
-	
+    
+	private double player1Speed = 3;
+	private double player2Speed = 10;
+	private double player3Speed = 3;
+    
 	@Override
 	public void start(Stage arg0) throws Exception {
 		// TODO Auto-generated method stub
@@ -50,7 +56,7 @@ public class TestTransform extends Application {
         animation.getKeyFrames().add(frame);
         animation.play();
   
-        
+        setKeyPresses();
         scene.setOnMousePressed(e -> {
         	
         	mouseX = e.getSceneX();
@@ -80,15 +86,66 @@ public class TestTransform extends Application {
         	
         });
         
+        
+        
 
+	}
+	
+	private void setKeyPresses()
+	{
+		scene.setOnKeyPressed(e -> {
+			
+			Vector2 direction = new Vector2(0,0);
+			
+			if(e.getCode() == KeyCode.LEFT)
+			{
+				direction = new Vector2().Left();
+			}
+			
+			if(e.getCode() == KeyCode.RIGHT)
+			{
+				direction = new Vector2().Right();
+			}
+			
+			if(e.getCode() == KeyCode.DOWN)
+			{
+				direction = new Vector2().Up();
+			}
+			
+			if(e.getCode() == KeyCode.UP)
+			{
+				direction = new Vector2().Down();
+			}
+			
+			player2.moveInDirection(direction, player2.getSpeed());
+		});
+		
+		scene.setOnKeyPressed(ef -> {
+			
+			if(ef.getCode() == KeyCode.H)
+			{
+				boolean val = player.getRect().isVisible();
+				player.getRect().setVisible(!val);
+			}
+			
+			if(ef.getCode() == KeyCode.J)
+			{
+				boolean val = player3.getRect().isVisible();
+				player3.getRect().setVisible(!val);
+			}
+			
+		});
 	}
 	
 	private void initialization()
 	{
-		player = new Player(new Vector2(300, 300), 40, Color.BLACK);
+		player = new Player(new Vector2(300, 300), 40, Color.BLACK, player1Speed);
 		root.getChildren().add(player.getRect());
 		
-		player2 = new Player(new Vector2(200, 200), 40, Color.RED);
+		player3 = new Player(new Vector2(100, 100), 40, Color.GREEN, player3Speed);
+		root.getChildren().add(player3.getRect());
+		
+		player2 = new Player(new Vector2(200, 200), 40, Color.RED, player2Speed);
 		root.getChildren().add(player2.getRect());
 	}
 	
@@ -98,10 +155,11 @@ public class TestTransform extends Application {
 	
 	private void step(double timeElapsed) {
 		
-		player.moveObject(player2, 3);
-		
+		player.moveTowards(player2, player.getSpeed());
+		player3.moveTowardsDamped(player2, player3.getSpeed(), SECOND_DELAY);
 		player.UpdateRectangle();
 		player2.UpdateRectangle();
+		player3.UpdateRectangle();
 		
 	}
 
