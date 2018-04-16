@@ -190,17 +190,18 @@ public class Transform {
 	 * 
 	 * @param radius
 	 * @param stepDistance
-	 * Parametric function that moves the object in a circle
+	 * @param origin = the point around which the circle will revolve
+	 * Parametric function that moves the object in a circle. 
 	 */
-	public void moveObjectInCircle(double radius, double stepDistance)
+	public void moveObjectInCircle(Vector2 origin, double radius, double stepDistance)
 	{
 		tCircle += stepDistance;
 		if(tCircle >= 360.0)
 		{
 			tCircle = 0.0;
 		}
-		Vector2 newPos = new Vector2(radius * Math.cos(tCircle) + position.getX(),
-				radius * Math.sin(tCircle) + position.getY());
+		Vector2 newPos = new Vector2(radius * Math.cos(tCircle) + origin.getX(),
+				radius * Math.sin(tCircle) + origin.getY());
 		this.position = newPos;
 		
 	}

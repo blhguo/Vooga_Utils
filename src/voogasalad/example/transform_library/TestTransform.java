@@ -34,6 +34,8 @@ public class TestTransform extends Application {
 	private Player player4;
 	private Player player5;
 	
+	private Vector2 p5originalPosition;
+	
     
     private double mouseX;
     private double mouseY;
@@ -131,17 +133,31 @@ public class TestTransform extends Application {
 			
 			if(ef.getCode() == KeyCode.H)
 			{
-				boolean val = player.getRect().isVisible();
-				player.getRect().setVisible(!val);
+				hideToggle(player);
 			}
 			
 			if(ef.getCode() == KeyCode.J) 
 			{
-				boolean val = player3.getRect().isVisible();
-				player3.getRect().setVisible(!val);
+				hideToggle(player3);
+			}
+			
+			if(ef.getCode() == KeyCode.K)
+			{
+				hideToggle(player4);
+			}
+			
+			if(ef.getCode() == KeyCode.L) 
+			{
+				hideToggle(player5);
 			}
 			
 		});
+	}
+	
+	private void hideToggle(Player pl)
+	{
+		boolean val = !pl.getRect().isVisible();
+		pl.getRect().setVisible(val);
 	}
 	
 	private void initialization()
@@ -160,6 +176,7 @@ public class TestTransform extends Application {
 		
 		player5 = new Player(new Vector2(200, 200), 40, Color.GRAY, 3);
 		root.getChildren().add(player5.getRect());
+		p5originalPosition = player5.getTransform().getPosition();
 	}
 	
 	public static void main(String[] args) {
@@ -171,7 +188,7 @@ public class TestTransform extends Application {
 		player.moveTowards(player2, player.getSpeed());
 		player3.moveTowardsDamped(player2, player3.getSpeed());
 		player4.pingpong(new Vector2(50,50), new Vector2(300, 300), player.getSpeed());
-		player5.getTransform().moveObjectInCircle(5.0, player5.getSpeed() * SECOND_DELAY);
+		player5.getTransform().moveObjectInCircle(p5originalPosition, 100.0, player5.getSpeed() * SECOND_DELAY);
 		
 		player.UpdateRectangle();
 		player2.UpdateRectangle();
