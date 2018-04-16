@@ -16,6 +16,7 @@ public class Transform {
 	private double rotation;
 	
 	private boolean toTarget = true;
+	private double tCircle = 0.0;
 
 	
 	public Transform(Vector2 position)
@@ -183,6 +184,25 @@ public class Transform {
 		{	
 			toTarget = moveTowards(original, stepDistance);
 		}
+	}
+	
+	/**
+	 * 
+	 * @param radius
+	 * @param stepDistance
+	 * Parametric function that moves the object in a circle
+	 */
+	public void moveObjectInCircle(double radius, double stepDistance)
+	{
+		tCircle += stepDistance;
+		if(tCircle >= 360.0)
+		{
+			tCircle = 0.0;
+		}
+		Vector2 newPos = new Vector2(radius * Math.cos(tCircle) + position.getX(),
+				radius * Math.sin(tCircle) + position.getY());
+		this.position = newPos;
+		
 	}
 	
 }

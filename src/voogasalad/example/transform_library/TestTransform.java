@@ -32,6 +32,7 @@ public class TestTransform extends Application {
 	private Player player2;
 	private Player player3;
 	private Player player4;
+	private Player player5;
 	
     
     private double mouseX;
@@ -156,6 +157,9 @@ public class TestTransform extends Application {
 		
 		player4 = new Player(new Vector2(50, 50), 40, Color.BLUE, 3);
 		root.getChildren().add(player4.getRect());
+		
+		player5 = new Player(new Vector2(200, 200), 40, Color.GRAY, 3);
+		root.getChildren().add(player5.getRect());
 	}
 	
 	public static void main(String[] args) {
@@ -167,13 +171,13 @@ public class TestTransform extends Application {
 		player.moveTowards(player2, player.getSpeed());
 		player3.moveTowardsDamped(player2, player3.getSpeed());
 		player4.pingpong(new Vector2(50,50), new Vector2(300, 300), player.getSpeed());
-		
+		player5.getTransform().moveObjectInCircle(5.0, player5.getSpeed() * SECOND_DELAY);
 		
 		player.UpdateRectangle();
 		player2.UpdateRectangle();
 		player3.UpdateRectangle();
 		player4.UpdateRectangle();
-		
+		player5.UpdateRectangle();
 	}
 
 	
