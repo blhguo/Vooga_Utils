@@ -11,7 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import voogasalad.util.transform_library.Vector2;
+import voogasalad.util.transformlibrary.Transform;
+import voogasalad.util.transformlibrary.Vector2;
 
 /**
  * 
@@ -30,6 +31,7 @@ public class TestTransform extends Application {
 	private Player player;
 	private Player player2;
 	private Player player3;
+	private Player player4;
 	
     
     private double mouseX;
@@ -62,6 +64,7 @@ public class TestTransform extends Application {
         	mouseX = e.getSceneX();
         	mouseY = e.getSceneY();
         	
+        	
         });
         
         scene.setOnMouseDragged(event -> {
@@ -78,7 +81,7 @@ public class TestTransform extends Application {
         	
         	//Vector2 pos = new Vector2(deltaX + playerPos.getX(), deltaY + playerPos.getY());
         	
-        	Vector2 pos = playerPos.AddVector(deltaXY);
+        	Vector2 pos = playerPos.addVector(deltaXY);
         	player2.getTransform().setPosition(pos);
         	player2.UpdateRectangle();
         	
@@ -105,22 +108,22 @@ public class TestTransform extends Application {
 			
 			if(ef.getCode() == KeyCode.LEFT)
 			{
-				direction = new Vector2().Left();
+				direction = Vector2.LEFT;
 			}
 			
 			if(ef.getCode() == KeyCode.RIGHT)
 			{
-				direction = new Vector2().Right();
+				direction = Vector2.RIGHT;
 			}
 			
 			if(ef.getCode() == KeyCode.DOWN)
 			{
-				direction = new Vector2().Up();
+				direction = Vector2.UP;
 			}
 			
 			if(ef.getCode() == KeyCode.UP)
 			{
-				direction = new Vector2().Down();
+				direction = Vector2.DOWN;
 			}
 			
 			player2.moveInDirection(direction, player2.getSpeed());
@@ -150,6 +153,9 @@ public class TestTransform extends Application {
 		
 		player2 = new Player(new Vector2(200, 200), 40, Color.RED, player2Speed);
 		root.getChildren().add(player2.getRect());
+		
+		player4 = new Player(new Vector2(50, 50), 40, Color.BLUE, 3);
+		root.getChildren().add(player4.getRect());
 	}
 	
 	public static void main(String[] args) {
@@ -160,11 +166,13 @@ public class TestTransform extends Application {
 		
 		player.moveTowards(player2, player.getSpeed());
 		player3.moveTowardsDamped(player2, player3.getSpeed());
+		player4.pingpong(new Vector2(50,50), new Vector2(300, 300), player.getSpeed());
 		
 		
 		player.UpdateRectangle();
 		player2.UpdateRectangle();
 		player3.UpdateRectangle();
+		player4.UpdateRectangle();
 		
 	}
 

@@ -6,8 +6,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import voogasalad.util.transform_library.Transform;
-import voogasalad.util.transform_library.Vector2;
+import voogasalad.util.transformlibrary.Transform;
+import voogasalad.util.transformlibrary.Vector2;
 
 
 public class Player {
@@ -65,17 +65,22 @@ public class Player {
 	 */
 	public void moveTowards(Player other, double stepDistance)
 	{
-		transform.MoveTowards(other.getTransform(), stepDistance);
+		transform.moveTowards(other.getTransform(), stepDistance);
 	}
 	
 	public void moveInDirection(Vector2 direction, double stepDistance)
 	{
-		transform.Move(direction, stepDistance);
+		transform.move(direction, stepDistance);
+	}
+	
+	public void pingpong(Vector2 original, Vector2 target, double stepDistance)
+	{
+		transform.pingPongObject(new Transform(original), new Transform(target), stepDistance);
 	}
 	
 	public void moveTowardsDamped(Player other, double stepDistance)
 	{
-		transform.DampedMoveTowards(other.getTransform(), stepDistance);
+		transform.acceleratedMoveTowards(other.getTransform(), stepDistance);
 	}
 
 	public double getSpeed() {

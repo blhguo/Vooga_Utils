@@ -1,4 +1,4 @@
-package voogasalad.util.transform_library;
+package voogasalad.util.transformlibrary;
 
 
 /**
@@ -10,13 +10,19 @@ package voogasalad.util.transform_library;
 
 public class Vector2 {
 	
+	public final static Vector2 UP = new Vector2(0,1);
+	public final static Vector2 DOWN = new Vector2(0,-1);
+	public final static Vector2 LEFT = new Vector2(-1,0);
+	public final static Vector2 RIGHT = new Vector2(1,0);
+
+	
 	private double x;
 	private double y;
 	
 	/**
 	 * Empty constructor if only needed for functions
 	 */
-	public Vector2(){}
+	public Vector2() {}
 	
 	public Vector2(double x, double y)
 	{
@@ -25,40 +31,24 @@ public class Vector2 {
 		
 	}
 
-	public double getX() {
+	public double getX() 
+	{
 		return x;
 	}
 
-	public void setX(double x) {
+	public void setX(double x) 
+	{
 		this.x = x;
 	}
 
-	public double getY() {
+	public double getY() 
+	{
 		return y;
 	}
 
-	public void setY(double y) {
+	public void setY(double y) 
+	{
 		this.y = y;
-	}
-	
-	public Vector2 Up()
-	{
-		return new Vector2(0, 1);
-	}
-	
-	public Vector2 Down()
-	{
-		return new Vector2(0, -1);
-	}
-	
-	public Vector2 Right()
-	{
-		return new Vector2(1, 0);
-	}
-	
-	public Vector2 Left()
-	{
-		return new Vector2(-1, 0);
 	}
 	
 	/**
@@ -99,7 +89,7 @@ public class Vector2 {
 	 * to Calculate the difference of two vectors, 
 	 * returns this - a
 	 */
-	public Vector2 SubtractVector(Vector2 b)
+	public Vector2 subtractVector(Vector2 b)
 	{
 		return new Vector2(x - b.getX(), y - b.getY());
 	}
@@ -111,7 +101,7 @@ public class Vector2 {
 	 * To calculate the sum of two vectors
 	 * returns this + b
 	 */
-	public Vector2 AddVector(Vector2 b)
+	public Vector2 addVector(Vector2 b)
 	{
 		return new Vector2(x + b.getX(), y + b.getY());
 	}
@@ -123,7 +113,7 @@ public class Vector2 {
 	 * Divides a vector by a scalar
 	 * returns this / divisor
 	 */
-	public Vector2 DivideVector(double divisor)
+	public Vector2 divideVector(double divisor)
 	{
 		return new Vector2(x / divisor,  y / divisor);
 	}
@@ -135,7 +125,7 @@ public class Vector2 {
 	 * Multiplies a vector by a scalar
 	 * return this * multiple
 	 */
-	public Vector2 MultiplyVector(double multiple)
+	public Vector2 multiplyVector(double multiple)
 	{
 		return new Vector2(x * multiple, y * multiple);
 		

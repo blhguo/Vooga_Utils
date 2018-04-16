@@ -1,4 +1,4 @@
-package voogasalad.util.transform_library;
+package voogasalad.util.transformlibrary;
 
 /**
  * 
@@ -14,17 +14,13 @@ public class Transform {
 	
 	private Vector2 position;
 	private double rotation;
+	
+	private boolean toTarget = true;
 
 	
 	public Transform(Vector2 position)
 	{
 		this.position = position;
-	}
-	
-	public Transform(Vector2 position, float rotation)
-	{
-		this.position = position;
-		this.rotation = rotation;
 	}
 	
 	public Vector2 getPosition()
@@ -37,15 +33,17 @@ public class Transform {
 		this.position = position;
 	}
 	
-	public double getRotation()
+	
+	public double getRotation() 
 	{
 		return rotation;
 	}
-	
-	public void setRotation(double rotation)
+
+	public void setRotation(double rotation) 
 	{
 		this.rotation = rotation;
 	}
+
 	/**
 	 * 
 	 * @param target
@@ -65,10 +63,10 @@ public class Transform {
 	 */
 	public Vector2 getDisplacementVector(Transform origin, Transform target)
 	{
-		return target.getPosition().SubtractVector(origin.getPosition());
+		return target.getPosition().subtractVector(origin.getPosition());
 	}
 	
-	/**]
+	/**
 	 * 
 	 * @param target
 	 * @return
@@ -121,9 +119,9 @@ public class Transform {
 	 * 
 	 * Move a transform object in a specific direction
 	 */
-	public void Move(Vector2 direction, double stepDistance)
+	public void move(Vector2 direction, double stepDistance)
 	{
-		position = position.AddVector(direction.MultiplyVector(stepDistance));
+		position = position.addVector(direction.multiplyVector(stepDistance));
 	}
 	
 	/**
@@ -131,18 +129,13 @@ public class Transform {
 	 * @param target: target transform object
 	 * @param stepDistance: the distance to be moved at every step
 	 * 
-	 * Moves the current object towards a new object at a constant speed. 
+	 * Moves the current object towards a new object at a constant speed.
+	 * Returns true when object has reached its destination 
 	 */
-	public void MoveTowards(Transform target, double stepDistance)
+	public boolean moveTowards(Transform target, double stepDistance)
 	{
-		Vector2 resultantVector = this.getDisplacementVector(target);
-		Vector2 temp = position.AddVector(resultantVector.getNormalized().MultiplyVector(stepDistance));
-		if(getDisplacement(this, target) <= stepDistance)
-		{
-			return;
-		}
-		position = temp;
-	
+		Vector2 resultantVector = this.getDisplacementVector(target).getNormalized();
+		return moveTowardsHelper(target, resultantVector, stepDistance);
 	}
 	
 	/**
@@ -152,17 +145,44 @@ public class Transform {
 	 * @param deltaTime: The time between frames
 	 * 
 	 * Moves the current object towards a new object, accelerating the object based upon the distance.
+	 * Returns true when object has reached its destination
 	 */
-	public void DampedMoveTowards(Transform target, double stepDistance)
+	public boolean acceleratedMoveTowards(Transform target, double stepDistance)
 	{
 		Vector2 resultantVector = this.getDisplacementVector(target);
-		Vector2 temp = position.AddVector(resultantVector.MultiplyVector(stepDistance));
+		return moveTowardsHelper(target, resultantVector, stepDistance);
+	
+	}
+	
+	private boolean moveTowardsHelper(Transform target, Vector2 resultantVector, double stepDistance)
+	{
+		Vector2 temp = position.addVector(resultantVector.multiplyVector(stepDistance));
 		if(getDisplacement(this, target) <= stepDistance)
 		{
-			return;
+			return true;
 		}
 		position = temp;
+		return false;
+	}
 	
+	/**
+	 * @param original
+	 * @param target
+	 * @param stepDistance
+	 * @param isAccelerated
+	 * Moves the object back and forth between two positions
+	 * User can specify if they desire acceleration or not
+	 */
+	public void pingPongObject(Transform original, Transform target, double stepDistance)
+	{		
+		if(toTarget)
+		{
+			toTarget = !moveTowards(target, stepDistance);
+		}		
+		else
+		{	
+			toTarget = moveTowards(original, stepDistance);
+		}
 	}
 	
 }
