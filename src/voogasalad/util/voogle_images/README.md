@@ -29,7 +29,9 @@ That's all it takes to get this utility up and running. An example JavaFX applic
 
 4.  Clicking the "View Image" button will bring you to a screen containing nothing more than the image you are interested in downloading. You'll notice that the button in the upper right-hand corner of the application has changed from "Non-image URL" to "Download." This gives you the green light that Voogle Images recognizes the URL as an image and should be able to complete the download for you successfully. ![alt text](https://imgur.com/1Z6nq5m.png)
 
-5. After downloading an image by giving it a name and a directory to be saved in, a download bar will pop up at the bottom of the screen. It functions similarly to the Google Chrome downloads bar, allowing you to see your past downloads. If you click on the gray portion of the download, it will open that image on your computer in your native image viewing application (on a Mac, this is Preview). If you click the red "X," that download will disappear. ![alt text](https://imgur.com/m3tlhhK.png)
+5. Once clicking on the "Download" button, you must read over and understand how to properly attribute your chosen image within your application. You must click "I understand" to advance. ![alt text](https://imgur.com/cbrxFUU.png)
+
+6. After downloading an image by giving it a name and a directory to be saved in, a download bar will pop up at the bottom of the screen. It functions similarly to the Google Chrome downloads bar, allowing you to see your past downloads. If you click on the gray portion of the download, it will open that image on your computer in your native image viewing application (on a Mac, this is Preview). If you click the red "X," that download will disappear. ![alt text](https://imgur.com/m3tlhhK.png)
 
 At any point over the course of the lifetime of the application, you may use the "Back," "Next," and "Search" buttons to navigate around. "Back" and "Next" do exactly what you would expect, and "Search" returns you to the default home page (which is Yahoo! Images by default).
 
