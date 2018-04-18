@@ -12,7 +12,7 @@ Voogle Images is extremely simple to use and was built with integration convenie
 2. Instantiate a `VoogleImages` object, and inject a reference to the class that implements the `ImageObserver` interface into the constructor. 
 3. Whenever you want to launch the `VoogleImages` utility, call its `void go()` method. I would expect this to most likely come from a button click, i.e. `button.setOnAction(e -> myVoogleImages.go());`, but that's completely implementation dependent and up to you.
 
-That's all it takes to get this utility up and running. An example JavaFX application can be found in the [example/]("../../example/voogle_images") directory, and I wholeheartedly encourage you to check that out to see how it might be used. It may be particularly useful for figuring out how to convert `File` objects to `ImageView` objects.
+That's all it takes to get this utility up and running. An example JavaFX application can be found in the example/ directory, and I wholeheartedly encourage you to check that out to see how it might be used. It may be particularly useful for figuring out how to convert `File` objects to `ImageView` objects.
 
 **Notes:** 
 
