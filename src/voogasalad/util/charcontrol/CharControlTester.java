@@ -113,17 +113,17 @@ public class CharControlTester extends Application{
 	 * @param input: The input received from the input queue.
 	 */
 	private void handleInput(ExampleEntity entity, String input) {
-		if(input.equals("moveLeft")) {
+		if(input.equals(METHODNAMES[0])) {
 			entity.moveLeft();
 		}
-		else if(input.equals("moveRight")) {
-			entity.moveRight();
-		}
-		else if(input.equals("moveUp")) {
+		else if(input.equals(METHODNAMES[1])) {
 			entity.moveUp();
 		}
-		else if(input.equals("moveDown")) {
+		else if(input.equals(METHODNAMES[2])) {
 			entity.moveDown();
+		}
+		else if(input.equals(METHODNAMES[3])) {
+			entity.moveRight();
 		}
 	}
 	
