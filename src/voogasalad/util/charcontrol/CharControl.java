@@ -6,10 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 /**
  * Class designed to give an entity the ability to learn and
  * mimic actions, similar to an AI. The entity should have a 
@@ -70,12 +66,11 @@ public class CharControl {
 					if(toAct!=null) {
 						toAct.invoke(character);
 					}
-				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-					Stage warning = new Stage();
-					Label warningLabel = new Label(REFLECTION_WARNING);
-					Scene toShow = new Scene(warningLabel);
-					warning.setScene(toShow);
-					warning.show();
+					else {
+						throw new CharControlException(REFLECTION_WARNING);
+					}
+				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | CharControlException e) {
+					System.out.println(e);
 				}
 			}
 			String nextExecute = currentExecute.nextInput();
@@ -165,6 +160,24 @@ public class CharControl {
 			}
 			return output;
 		}
+	}
+	/**
+	 * Exception to be caught if an error is found in the reflection
+	 * process for the acting entity.
+	 * 
+	 * @author Brandon Dalla Rosa
+	 *
+	 */
+	@SuppressWarnings("serial")
+	private class CharControlException extends Exception{
+		String toShow;
+		CharControlException(String message){
+			toShow = message;
+		}
+		public String toString() {
+			return "CharControlException: "+toShow;
+		}
+		
 	}
 
 }
