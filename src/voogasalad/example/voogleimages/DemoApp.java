@@ -43,7 +43,7 @@ public class DemoApp implements ImageObserver {
 	 */
 	public DemoApp() {
 		VBox main = new VBox();
-		main.setId("vbox");
+		main.getStyleClass().add("demo-align");
 
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + DEFAULT_LANG);
 
@@ -152,12 +152,12 @@ public class DemoApp implements ImageObserver {
 	 */
 	private Node createMenu(EventHandler<ActionEvent> handler) {
 		VBox vbox = new VBox();
-		vbox.setId("vbox");
+		vbox.getStyleClass().add("demo-align");
 		Button launch = new Button(myResources.getString("Select"));
 		launch.setOnAction(handler);
 
 		myCol = new VBox();
-		myCol.setId("vbox");
+		myCol.getStyleClass().add("demo-align");
 		ScrollPane sp = new ScrollPane();
 		sp.setContent(myCol);
 		vbox.getChildren().addAll(launch, sp);
