@@ -83,7 +83,7 @@ public class VoogleImages {
 
 		BorderPane root = new BorderPane();
 		root.setCenter(makePageDisplay());
-		root.setTop(myNavBar.getNode());
+		root.setTop(myNavBar);
 		root.setBottom(myDownloadBar.getNode());
 
 		myScene = new Scene(root, DEFAULT_SIZE.getWidth(), DEFAULT_SIZE.getHeight());

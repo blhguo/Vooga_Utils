@@ -21,7 +21,7 @@ import voogasalad.util.voogleimages.VoogleImages;
  * 
  * @author benhubsch
  */
-public class NavigationBar {
+public class NavigationBar extends VBox {
 
 	private static final int BUTTON_HEIGHT = 20;
 	private static final String IMAGES = "Image";
@@ -30,7 +30,6 @@ public class NavigationBar {
 
 	private Button myDownloadButton;
 	private Button myInvalidButton;
-	private VBox myResult;
 	private HBox myDownloadBox;
 
 	/**
@@ -43,17 +42,7 @@ public class NavigationBar {
 	 */
 	public NavigationBar(EventHandler<MouseEvent> back, EventHandler<MouseEvent> next, EventHandler<MouseEvent> search,
 			EventHandler<MouseEvent> download) {
-		myResult = new VBox();
-		myResult.getChildren().addAll(makeNavigationPanel(back, next, search, download));
-	}
-
-	/**
-	 * Gets the NavigationBar's highest level Node for rendering purposes.
-	 * 
-	 * @return Node to be attached to the scene.
-	 */
-	public Node getNode() {
-		return myResult;
+		this.getChildren().addAll(makeNavigationPanel(back, next, search, download));
 	}
 
 	/**
