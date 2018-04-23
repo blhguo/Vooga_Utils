@@ -1,4 +1,4 @@
-package charcontrol;
+package voogasalad.util.charcontrol;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -20,6 +20,8 @@ import javafx.stage.Stage;
  *
  */
 public class CharControl {
+	private static final String NULL_PLACEHOLDER = "NULL";
+	private static final String REFLECTION_WARNING = "Warning: Incorrect inputs or object provided to CharControl";
 	private Object character;
 	private List<MoveData> moveList;
 	private Map<String, Method> methodMap;
@@ -32,9 +34,9 @@ public class CharControl {
 	 * entity is set to null until trained with data.
 	 * 
 	 * @param otherObject: The character desired to act in an intelligent manner.
-	 * @param inputs: The list of desired method names to be called.
+	 * @param inputs: The desired method names to be called by the entity.
 	 */
-	public CharControl(Object otherObject, String[] inputs) {
+	public CharControl(Object otherObject, String... inputs) {
 		this.character = otherObject;
 		this.inputAdded = false;
 		moveList = new ArrayList<MoveData>();
@@ -49,10 +51,10 @@ public class CharControl {
 				}
 			}
 		}
-		MoveData defInit = new MoveData("NULL");
+		MoveData defInit = new MoveData(NULL_PLACEHOLDER);
 		moveList.add(defInit);
 		currentInput = defInit;
-		currentExecute = new MoveData("NULL");
+		currentExecute = new MoveData(NULL_PLACEHOLDER);
 	}
 	
 	/**
@@ -62,13 +64,15 @@ public class CharControl {
 	public void act() {
 		if(inputAdded) {
 			String action = currentExecute.getWord();
-			if(!currentExecute.getWord().equals("NULL")) {
+			if(!currentExecute.getWord().equals(NULL_PLACEHOLDER)) {
 				Method toAct = methodMap.get(action);
 				try {
-					toAct.invoke(character);
+					if(toAct!=null) {
+						toAct.invoke(character);
+					}
 				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 					Stage warning = new Stage();
-					Label warningLabel = new Label("Warning: Incorrect inputs or object provided to CharControl");
+					Label warningLabel = new Label(REFLECTION_WARNING);
 					Scene toShow = new Scene(warningLabel);
 					warning.setScene(toShow);
 					warning.show();
@@ -96,10 +100,10 @@ public class CharControl {
 				currentExecute = data;
 			}
 		}
-		if(!currentExecute.getWord().equals("NULL")) {
+		if(!currentExecute.getWord().equals(NULL_PLACEHOLDER)) {
 			return action;
 		}
-		return "NULL";
+		return NULL_PLACEHOLDER;
 	}
 	
 	/**
