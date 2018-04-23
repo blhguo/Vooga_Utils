@@ -14,11 +14,10 @@ import javafx.util.Duration;
  * 
  * @author benhubsch
  */
-public class DownloadBar {
+public class DownloadBar extends HBox {
 
 	private static final int TRANSITION_LENGTH_MILLI = 1000;
-
-	private HBox myHBox;
+	
 	private ResourceBundle myResources;
 
 	/**
@@ -29,17 +28,7 @@ public class DownloadBar {
 	public DownloadBar(ResourceBundle resources) {
 		myResources = resources;
 
-		myHBox = new HBox();
-		myHBox.setId("download-bar");
-	}
-
-	/**
-	 * Gets the NavigationBar's highest level Node for rendering purposes.
-	 * 
-	 * @return Node to be attached to the scene.
-	 */
-	public Node getNode() {
-		return myHBox;
+		this.setId("download-bar");
 	}
 
 	/**
@@ -53,7 +42,7 @@ public class DownloadBar {
 		download.setCloseHandler(e -> removeDownload(download));
 		addTransition(download.getNode());
 
-		myHBox.getChildren().add(download.getNode());
+		this.getChildren().add(download.getNode());
 	}
 
 	/**
@@ -62,7 +51,7 @@ public class DownloadBar {
 	 * @param download
 	 */
 	public void removeDownload(Download download) {
-		myHBox.getChildren().remove(download.getNode());
+		this.getChildren().remove(download.getNode());
 	}
 
 	/**
