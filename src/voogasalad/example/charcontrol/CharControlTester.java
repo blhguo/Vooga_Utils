@@ -1,4 +1,4 @@
-package voogasalad.util.charcontrol;
+package voogasalad.example.charcontrol;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import voogasalad.util.charcontrol.CharControl;
 /**
  * This class demonstrates basic usage of the CharControl class,
  * using an example entity which has the ability to move in

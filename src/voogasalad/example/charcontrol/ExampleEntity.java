@@ -1,4 +1,4 @@
-package voogasalad.util.charcontrol;
+package voogasalad.example.charcontrol;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 /**
