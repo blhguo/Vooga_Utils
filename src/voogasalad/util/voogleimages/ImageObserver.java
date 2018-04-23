@@ -1,4 +1,4 @@
-package voogasalad.util.voogle_images;
+package voogasalad.util.voogleimages;
 
 import java.io.File;
 

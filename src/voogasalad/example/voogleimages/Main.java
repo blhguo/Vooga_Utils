@@ -1,4 +1,4 @@
-package voogasalad.example.voogle_images;
+package voogasalad.example.voogleimages;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

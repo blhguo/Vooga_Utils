@@ -1,4 +1,4 @@
-package voogasalad.example.voogle_images;
+package voogasalad.example.voogleimages;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,8 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import voogasalad.util.voogle_images.ImageObserver;
-import voogasalad.util.voogle_images.VoogleImages;
+import voogasalad.util.voogleimages.ImageObserver;
+import voogasalad.util.voogleimages.VoogleImages;
 
 /**
  * A simple demo application demonstrating how to make use of the VoogleImages utility.

@@ -1,4 +1,4 @@
-package voogasalad.util.voogle_images;
+package voogasalad.util.voogleimages;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -23,8 +23,8 @@ import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import voogasalad.util.voogle_images.view.NavigationBar;
-import voogasalad.util.voogle_images.view.download.DownloadBar;
+import voogasalad.util.voogleimages.view.NavigationBar;
+import voogasalad.util.voogleimages.view.download.DownloadBar;
 
 /**
  * This utility provides a way for a user of an application to download images from the internet for

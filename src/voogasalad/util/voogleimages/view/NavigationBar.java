@@ -1,4 +1,4 @@
-package voogasalad.util.voogle_images.view;
+package voogasalad.util.voogleimages.view;
 
 import java.util.ResourceBundle;
 
@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import voogasalad.util.voogle_images.VoogleImages;
+import voogasalad.util.voogleimages.VoogleImages;
 
 /**
  * Represents the bar at the top of the UI that the user can use to navigate through the browser and
