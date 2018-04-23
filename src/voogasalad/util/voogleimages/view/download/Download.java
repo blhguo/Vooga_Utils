@@ -5,7 +5,6 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -17,11 +16,10 @@ import javafx.scene.layout.HBox;
  * 
  * @author benhubsch
  */
-public class Download {
+public class Download extends HBox {
 
 	private static final int MAX_NAME_LENGTH = 20;
 
-	private HBox myHBox;
 	private Button myClose;
 
 	/**
@@ -31,8 +29,7 @@ public class Download {
 	 * @param resources A properties file containing key-value language mappings.
 	 */
 	public Download(File file, ResourceBundle resources) {
-		myHBox = new HBox();
-		myHBox.setId("download");
+		this.setId("download");
 
 		Button open = new Button(format(file.getName()));
 		open.getStyleClass().add("open");
@@ -41,16 +38,7 @@ public class Download {
 		myClose = new Button("X");
 		myClose.getStyleClass().add("close");
 
-		myHBox.getChildren().addAll(open, myClose);
-	}
-
-	/**
-	 * Gets the NavigationBar's highest level Node for rendering purposes.
-	 * 
-	 * @return Node to be attached to the scene.
-	 */
-	public Node getNode() {
-		return myHBox;
+		this.getChildren().addAll(open, myClose);
 	}
 
 	/**

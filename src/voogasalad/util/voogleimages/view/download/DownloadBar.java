@@ -40,9 +40,9 @@ public class DownloadBar extends HBox {
 	public void addDownload(File file) {
 		Download download = new Download(file, myResources);
 		download.setCloseHandler(e -> removeDownload(download));
-		addTransition(download.getNode());
+		addTransition(download);
 
-		this.getChildren().add(download.getNode());
+		this.getChildren().add(download);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class DownloadBar extends HBox {
 	 * @param download
 	 */
 	public void removeDownload(Download download) {
-		this.getChildren().remove(download.getNode());
+		this.getChildren().remove(download);
 	}
 
 	/**
