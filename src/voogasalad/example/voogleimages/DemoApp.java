@@ -27,7 +27,7 @@ import voogasalad.util.voogleimages.VoogleImages;
  */
 public class DemoApp implements ImageObserver {
 
-	private static final String DEFAULT_RESOURCE_PACKAGE = "voogasalad/example/voogle_images/resources/";
+	private static final String DEFAULT_RESOURCE_PACKAGE = "voogasalad/example/voogleimages/resources/";
 	private static final String DEFAULT_LANG = "English";
 	private static final String STYLESHEET = "example.css";
 	private static final Dimension2D DIMENSION = new Dimension2D(300, 800);
