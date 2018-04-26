@@ -33,16 +33,30 @@ import voogasalad.util.soundfactory.propertiesfiletools.PropertiesReader;
 public class ITRTSoundFactory implements SoundFactory {
     
     private static final double FULL_VOLUME = 1.0;
-    private static final String PROPERTIES_FILE_PATH = "src/voogasalad/util/soundfactory/resources/soundFiles.properties";
+    private static final String DEFAULT_PROPERTIES_FILE_PATH = "src/voogasalad/util/soundfactory/resources/soundFiles.properties";
     
-    MediaPlayer myMediaPlayer;
-    Double myVolume;
+    private String myPropertiesFilePath;
+    private MediaPlayer myMediaPlayer;
+    private Double myVolume;
 
+    /**
+     * This method has been deprecated
+     * The version to replace it is public ITRTSoundFactory(String propertiesFilePath)
+     * This is to reflect the fact that properties files can and should be saved in your own project, rather than in the utility\
+     * Then, your sounds can be added to your properties file without affecting the utility
+     */
+    @Deprecated
+    public ITRTSoundFactory() {
+	this(DEFAULT_PROPERTIES_FILE_PATH);
+    }
+    
     /**
      * This public constructor initializes an ITRTSoundFactory
      * Its volume is by default set to full volume
+     * @param propertiesFilePath is the file path to a properties file which maps sound names to mp3 filepaths
      */
-    public ITRTSoundFactory() {
+    public ITRTSoundFactory(String propertiesFilePath) {
+	this.myPropertiesFilePath = propertiesFilePath;
 	this.myMediaPlayer = null;
 	this.myVolume = FULL_VOLUME;
     }
@@ -59,7 +73,7 @@ public class ITRTSoundFactory implements SoundFactory {
     public void playSoundEffect(String soundName) throws FileNotFoundException {
 	String fileName;
 	try {
-	    fileName = new PropertiesReader().findVal(PROPERTIES_FILE_PATH, soundName);
+	    fileName = new PropertiesReader().findVal(myPropertiesFilePath, soundName);
 	} catch (MissingPropertiesException e) {
 	    throw new FileNotFoundException();
 	}
@@ -82,7 +96,7 @@ public class ITRTSoundFactory implements SoundFactory {
     public void setBackgroundMusic(String musicName) throws FileNotFoundException {
 	String fileName;
 	try {
-	    fileName = new PropertiesReader().findVal(PROPERTIES_FILE_PATH, musicName);
+	    fileName = new PropertiesReader().findVal(myPropertiesFilePath, musicName);
 	} catch (MissingPropertiesException e) {
 	    throw new FileNotFoundException();
 	}
