@@ -1,8 +1,12 @@
 # Sound Factory
 This is team IfTrueReturnTrue's Sound Factory utility, which provides easy to integrate sound functionality for JavaFX Applications
 
-## Version 1.0
 An example usage of this utility is shown in `SoundTestDriver.java`
+
+## Version 1.1
+
+##### New in version 1.1
+Since version 1.0, the constructor of ITRTSoundFactory has been deprecated and replaced with one which takes a properties file path as a parameter.  This allows for use of your own properties file, to which you can add and remove sounds at will without affecting the utility.
 
 ##### Known Bugs
 * Sound will not play on macOS HighSierra, version 10.13.*
