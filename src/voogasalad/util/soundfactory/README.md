@@ -14,6 +14,7 @@ Since version 1.0, the constructor of ITRTSoundFactory has been deprecated and r
 ##### Upcoming Releases
 * Reimplement sound playing with technology that works on all modern operating systems.  This will not affect interface or usage
 * Interface with Spotify to stream any song
+* Likely will deprecate specific button methods and replace with a more generic method that takes a lambda parameter
 
 ##### Feedback/Bug Reports
 Please report any bugs or feedback to benjamin.auriemma@duke.edu
