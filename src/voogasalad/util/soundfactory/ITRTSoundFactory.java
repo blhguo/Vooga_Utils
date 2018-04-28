@@ -1,14 +1,15 @@
 package voogasalad.util.soundfactory;
 
-//COMMENT TO TEST SUBMODULE UPDATES
-
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import voogasalad.util.soundfactory.propertiesfiletools.MissingPropertiesException;
 import voogasalad.util.soundfactory.propertiesfiletools.PropertiesReader;
 
@@ -33,13 +34,14 @@ import voogasalad.util.soundfactory.propertiesfiletools.PropertiesReader;
  *
  */
 public class ITRTSoundFactory implements SoundFactory {
-    
+
     private static final double FULL_VOLUME = 1.0;
     private static final String DEFAULT_PROPERTIES_FILE_PATH = "src/voogasalad/util/soundfactory/resources/soundFiles.properties";
-    
+
     private String myPropertiesFilePath;
     private MediaPlayer myMediaPlayer;
-    private Double myVolume;
+    private DoubleProperty myVolume;
+    private Duration myCurrentMusicPosition;
 
     /**
      * This method has been deprecated
@@ -51,7 +53,7 @@ public class ITRTSoundFactory implements SoundFactory {
     public ITRTSoundFactory() {
 	this(DEFAULT_PROPERTIES_FILE_PATH);
     }
-    
+
     /**
      * This public constructor initializes an ITRTSoundFactory
      * Its volume is by default set to full volume
@@ -60,7 +62,8 @@ public class ITRTSoundFactory implements SoundFactory {
     public ITRTSoundFactory(String propertiesFilePath) {
 	this.myPropertiesFilePath = propertiesFilePath;
 	this.myMediaPlayer = null;
-	this.myVolume = FULL_VOLUME;
+	this.myVolume = new SimpleDoubleProperty(FULL_VOLUME);
+	myCurrentMusicPosition = new Duration(0);
     }
 
     /**
@@ -82,7 +85,7 @@ public class ITRTSoundFactory implements SoundFactory {
 	File file = new File(fileName);
 	Media sound = new Media(file.toURI().toString());
 	MediaPlayer soundPlayer = new MediaPlayer(sound);
-	soundPlayer.setVolume(myVolume);
+	soundPlayer.setVolume(myVolume.get());
 	soundPlayer.play();
     }
 
@@ -117,6 +120,7 @@ public class ITRTSoundFactory implements SoundFactory {
      */
     @Override
     public void playBackgroundMusic() {
+	this.myMediaPlayer.setStartTime(myCurrentMusicPosition);
 	this.myMediaPlayer.play();
     }
 
@@ -130,6 +134,7 @@ public class ITRTSoundFactory implements SoundFactory {
      */
     @Override
     public void pauseBackgroundMusic() {
+	this.myCurrentMusicPosition = this.myMediaPlayer.getCurrentTime();
 	this.myMediaPlayer.pause();
     }
 
@@ -143,9 +148,9 @@ public class ITRTSoundFactory implements SoundFactory {
      */
     @Override
     public void setVolume(Integer percentVolume) {
-	this.myVolume = percentVolume/100.0; //this hard-coded value exists because the parameter is on a percentage scale, 
-					     //but is used as a value between 0 and 1. This value should never be changed
-	this.myMediaPlayer.setVolume(myVolume);
+	this.myVolume.set(percentVolume/100.0); //this hard-coded value exists because the parameter is on a percentage scale, 
+	//but is used as a value between 0 and 1. This value should never be changed
+	this.myMediaPlayer.setVolume(myVolume.get());
     }
 
     /**
@@ -158,8 +163,8 @@ public class ITRTSoundFactory implements SoundFactory {
      */
     @Override
     public void mute() {
-	this.myVolume = 0.0;
-	this.myMediaPlayer.setVolume(myVolume);
+	this.myVolume.set(0.0);
+	this.myMediaPlayer.setVolume(myVolume.get());
     }
 
     /**
@@ -174,7 +179,7 @@ public class ITRTSoundFactory implements SoundFactory {
     public Button createPlayBackgroundMusicButton() {
 	return new PlayBackgroundMusicButton(this);
     }
-    
+
     /**
      * Implements method of the same signature in SoundFactory.
      * The usage of this method is described in interface documentation.
@@ -187,7 +192,7 @@ public class ITRTSoundFactory implements SoundFactory {
     public Button createPauseBackgroundMusicButton() {
 	return new PauseBackgroundMusicButton(this);
     }
-    
+
     /**
      * Implements method of the same signature in SoundFactory.
      * The usage of this method is described in interface documentation.
@@ -211,7 +216,17 @@ public class ITRTSoundFactory implements SoundFactory {
      */
     @Override
     public Button createMuteButton() {
-	    return new MuteButton(this);
+	return new MuteButton(this);
+    }
+
+    /**
+     * Implements method of the same signature in SoundFactory.
+     * The usage of this method is described in interface documentation.
+     * 
+     */
+    @Override
+    public DoubleProperty getVolume() {
+	return myVolume;
     }
 
 }

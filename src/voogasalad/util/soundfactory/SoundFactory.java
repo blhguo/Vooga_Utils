@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.beans.property.DoubleProperty;
 
 /**
  * This serves as the API for our Sound Factory utility
@@ -87,5 +88,12 @@ public interface SoundFactory {
      * @return the mute button which can be added to a screen and clicked
      */
     public Button createMuteButton();
-
+    
+    /**
+     * This method is used to be called by VolumeSlider objects
+     * It allows a VolumeSlider to listen to the volume property and adjust the slider position is volume is change elsewhere
+     * @return a DoubleProperty representing the volume which can be listened to
+     */
+    public DoubleProperty getVolume();
+    
 }
