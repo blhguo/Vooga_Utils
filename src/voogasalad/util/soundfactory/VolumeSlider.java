@@ -1,5 +1,7 @@
 package voogasalad.util.soundfactory;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.control.Slider;
 
 /**
@@ -14,6 +16,7 @@ public class VolumeSlider extends Slider {
     private static final Integer MAX_VOLUME = 100;
     private static final Integer DEFAULT_VOLUME = 110;
     
+    private DoubleProperty myVolume;
     private SoundFactory mySoundFactory;
 
     /**
@@ -24,6 +27,8 @@ public class VolumeSlider extends Slider {
 	super(MIN_VOLUME, MAX_VOLUME, DEFAULT_VOLUME);
 	mySoundFactory = soundFactory;
 	this.valueProperty().addListener(e -> setVolume());
+	//myVolume = new SimpleDoubleProperty(mySoundFactory.getVolume());
+	this.mySoundFactory.getVolume().addListener(e -> setPosition());
     }
     
     /**
@@ -31,6 +36,11 @@ public class VolumeSlider extends Slider {
      */
     private void setVolume() {
 	mySoundFactory.setVolume((int) this.getValue());
+    }
+    
+    private void setPosition() {
+	System.out.println("Volume slider trying to adjust its position");
+	this.adjustValue(mySoundFactory.getVolume().get()*100);
     }
     
 }
