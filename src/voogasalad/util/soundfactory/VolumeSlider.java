@@ -24,6 +24,7 @@ public class VolumeSlider extends Slider {
 	super(MIN_VOLUME, MAX_VOLUME, DEFAULT_VOLUME);
 	mySoundFactory = soundFactory;
 	this.valueProperty().addListener(e -> setVolume());
+	this.mySoundFactory.getVolume().addListener(e -> setPosition());
     }
     
     /**
@@ -31,6 +32,13 @@ public class VolumeSlider extends Slider {
      */
     private void setVolume() {
 	mySoundFactory.setVolume((int) this.getValue());
+    }
+    
+    /**
+     * This method sets the position of the slider to the current volume of the SoundFactory it was created from
+     */
+    private void setPosition() {
+	this.adjustValue(mySoundFactory.getVolume().get()*100);
     }
     
 }
