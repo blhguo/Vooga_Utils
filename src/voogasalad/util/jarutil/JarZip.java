@@ -109,7 +109,7 @@ public class JarZip
 
             System.out.println("Done");
         }catch(IOException ex){
-            ex.printStackTrace();
+           System.out.print("error loading jar");
         }
     }
 
